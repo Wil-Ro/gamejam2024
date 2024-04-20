@@ -2,6 +2,7 @@ package com.monjaro.gamejam;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -38,9 +39,17 @@ public class Game extends ApplicationAdapter {
 	}
 
 	public void tick() {
-		actors.forEach(Actor::tick);
+		processInput();
 
-		dice.forEach(Die::roll);
+		actors.forEach(Actor::tick);
+	}
+
+	public void processInput() {
+		Input input = Gdx.input;
+
+		if (input.isKeyJustPressed(Input.Keys.R)) {
+			dice.forEach(Die::roll);
+		}
 	}
 
 	@Override
