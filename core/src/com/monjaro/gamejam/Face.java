@@ -1,10 +1,13 @@
 package com.monjaro.gamejam;
-
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Face {
+public class Face extends Actor{
+
+	private Rectangle shape;
 
 	private final List<Pip> pips = new ArrayList<>();
 
@@ -40,6 +43,25 @@ public class Face {
 		public double getY() {
 			return y;
 		}
+
+	}
+
+	public void setPosition(float x, float y){
+		shape.setX(x);
+		shape.setY(y);
+	}
+
+	public void setSize(float w, float h){
+		shape.setSize(w, h);
+	}
+
+	@Override
+	public void tick() {
+
+	}
+
+	@Override
+	public void render(SpriteBatch batch) {
 
 	}
 
