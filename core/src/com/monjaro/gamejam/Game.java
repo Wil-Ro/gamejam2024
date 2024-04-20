@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -35,9 +36,12 @@ public class Game extends ApplicationAdapter {
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
+		Die.setLockedSprite(new Texture("locked_die_border.png"));
 
-		for (int i = 1; i <= 5; i++) {
-			dice.add(new Die((i*80), 20, 64, 64));
+		Vector2 dieSize = new Vector2();
+		float divide = Gdx.graphics.getWidth() / 6f;
+		for (int i = 0; i < 5; i++) {
+			dice.add(new Die(divide * (i + 1), 350, 64, 64));
 		}
 	}
 
