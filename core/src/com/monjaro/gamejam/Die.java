@@ -14,10 +14,12 @@ public class Die extends Actor {
 	1 2 3 4
 	  5
 	 */
+
 	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
 
 	private final Random random = new Random(); //TODO use central random
+
 
 	public Die() {
 		int[] pips = {4, 6, 5, 1, 2, 3};
@@ -43,9 +45,7 @@ public class Die extends Actor {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		for (Face face : faces) {
-			face.render(batch);
-		}
+		faces[faceIndex].render(batch);
 	}
 
 	public void roll() {

@@ -26,6 +26,7 @@ public class Game extends ApplicationAdapter {
 	private final static int TICKS_PER_SECOND = 60;
 	private double tickProgress = 0;
 
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
