@@ -1,7 +1,7 @@
 package com.monjaro.gamejam;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -10,10 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-
 public class Face extends Actor{
 
-	private Rectangle shape = new Rectangle();
+	private final Rectangle shape = new Rectangle();
 
 	private final List<Pip> pips = new ArrayList<>();
 

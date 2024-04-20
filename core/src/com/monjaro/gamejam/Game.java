@@ -3,9 +3,7 @@ package com.monjaro.gamejam;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -21,7 +19,6 @@ public class Game extends ApplicationAdapter {
 	private final List<Die> dice = new ArrayList<>();
 
 	private SpriteBatch batch;
-	private BitmapFont font;
 	private Texture img;
 
 	private final static int TICKS_PER_SECOND = 60;
@@ -30,7 +27,6 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		img = new Texture("badlogic.jpg");
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
@@ -78,7 +74,6 @@ public class Game extends ApplicationAdapter {
 		actors.forEach(a -> a.render(batch));
 
 		//TODO debug
-		int x = 100;
 		for (Die die : dice) {
 			die.render(batch);
 		}

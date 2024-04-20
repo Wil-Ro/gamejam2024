@@ -9,25 +9,17 @@ import java.util.Random;
 public class Die extends Actor {
 
 	private final Rectangle shape;
+
 	/*
 	  0
 	1 2 3 4
 	  5
 	 */
-
 	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
 	private boolean locked = false;
 
 	private final Random random = new Random(); //TODO use central random
-
-	public Die() {
-		int[] pips = {4, 6, 5, 1, 2, 3};
-		for (int i = 0; i < faces.length; i++) {
-			faces[i] = new Face(pips[i]);
-		}
-		shape = new Rectangle();
-	}
 
 	public Die(float x, float y, float width, float height) {
 		int[] pips = {4, 6, 5, 1, 2, 3};
