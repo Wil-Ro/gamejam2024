@@ -1,14 +1,13 @@
 package com.monjaro.gamejam;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-
 import java.util.List;
 import java.util.Random;
 
 public class Die extends Actor {
 
-	private final Rectangle shape;
+	private Transform transform;
 
 	/*
 	  0
@@ -19,26 +18,27 @@ public class Die extends Actor {
 	private int faceIndex = 3;
 	private boolean locked = false;
 
+	private static Texture lockedSprite;
+
 	private final Random random = new Random(); //TODO use central random
 
+
 	public Die(float x, float y, float width, float height) {
+		transform = new Transform(x, y, width, height);
+
 		int[] pips = {4, 6, 5, 1, 2, 3};
 		for (int i = 0; i < faces.length; i++) {
-			faces[i] = new Face(pips[i]);
-			faces[i].setPosition(x, y);
-			faces[i].setSize(width, height);
+			faces[i] = new Face(pips[i], transform);
 		}
-		shape = new Rectangle(x, y, width, height);
-
 	}
 
 	public void setPosition(float x, float y){
-		shape.setX(x);
-		shape.setY(y);
+		transform.setX(x);
+		transform.setY(y);
 	}
 
 	public void setSize(float w, float h){
-		shape.setSize(w, h);
+		transform.setSize(w, h);
 	}
 
 	@Override
@@ -53,6 +53,10 @@ public class Die extends Actor {
 
 	public void roll() {
 		faceIndex = random.nextInt(6);
+	}
+
+	public static void setLockedSprite(Texture sprite){
+		lockedSprite = sprite;
 	}
 
 	public void decay() { //remove a pip from all faces of this die
@@ -80,6 +84,18 @@ public class Die extends Actor {
 	}
 
 	public void setLocked(boolean locked) {
+		if (locked != this.locked)
+		{
+			if (locked) {
+				transform.y += 64;
+				transform.rotation = 20;
+			}
+			else{
+				transform.y -= 64;
+				transform.rotation = 0;
+			}
+		} // terrible
+
 		this.locked = locked;
 	}
 

@@ -1,6 +1,7 @@
 package com.monjaro.gamejam;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -12,23 +13,23 @@ import java.util.Random;
 
 public class Face extends Actor{
 
-	private final Rectangle shape = new Rectangle();
+	private Transform transform;
 
 	private final List<Pip> pips = new ArrayList<>();
 
 	private static Texture blankFaceSprite;
 	private static Texture pipSprite;
 
-
-	public Face(int pipCount) {
+	public Face(int pipCount, Transform transform) {
 		addPipsForValue(pipCount);
+		this.transform = transform;
 	}
 
 	private void addPipsForValue(int value){
-		int[][] positions = {{25, 25}, {75, 75}, {25, 75}, {75, 25}, {25, 50}, {75, 50}};
+		int[][] positions = {{-25, -25}, {25, 25}, {-25, 25}, {25, -25}, {-25, 0}, {25, 0}};
 
 		if (value % 2 == 1) {
-			pips.add(new Pip(50, 50));
+			pips.add(new Pip(0, 0));
 			value--;
 		}
 
@@ -72,12 +73,12 @@ public class Face extends Actor{
 	}
 
 	public void setPosition(float x, float y){
-		shape.setX(x);
-		shape.setY(y);
+		transform.setX(x);
+		transform.setY(y);
 	}
 
 	public void setSize(float w, float h){
-		shape.setSize(w, h);
+		transform.setSize(w, h);
 	}
 
 	public static void setBlankFaceSprite(Texture sprite){
@@ -88,13 +89,15 @@ public class Face extends Actor{
 		pipSprite = sprite;
 	}
 
-	public Vector2 getPipLocationFromPercentage(Vector2 percentages)
-	{
-		Vector2 position = new Vector2(
-				shape.x + (shape.width*percentages.x/100f) - (float)pipSprite.getWidth()/2,
-				shape.y + shape.width*percentages.y/100f - (float)pipSprite.getHeight()/2);
+	public Vector2 calculatePipLocation(Vector2 percentages) {
+		double radians = Math.toRadians(transform.rotation);
 
-		return position;
+		float x = (float) (percentages.x * Math.cos(radians) - percentages.y * Math.sin(radians));
+		float y = (float) (percentages.x * Math.sin(radians) + percentages.y * Math.cos(radians));
+
+        return new Vector2(
+				transform.x + transform.width*x/100f - (float)pipSprite.getWidth()/2,
+				transform.y + transform.height*y/100f - (float)pipSprite.getHeight()/2);
 	}
 
 	@Override
@@ -104,9 +107,14 @@ public class Face extends Actor{
 
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(blankFaceSprite, shape.x, shape.y, shape.width, shape.height);
+		Sprite face = new Sprite(blankFaceSprite);
+		face.setOrigin(face.getWidth()/2, face.getHeight()/2);
+		face.rotate(transform.getRotation());
+		face.setPosition(transform.x-face.getWidth()/2, transform.y-face.getHeight()/2);
+		face.draw(batch);
+
 		for(Pip pip : pips){
-			Vector2 position = getPipLocationFromPercentage(pip.getVectorLocation());
+			Vector2 position = calculatePipLocation(pip.getVectorLocation());
 			batch.draw(pipSprite,
 					position.x,
 					position.y);
