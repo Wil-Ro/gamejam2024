@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
+
 
 public class Face extends Actor{
 
@@ -26,7 +26,7 @@ public class Face extends Actor{
 	private void addPipsForValue(int value){
 		int[][] positions = {{25, 25}, {75, 75}, {25, 75}, {75, 25}, {25, 50}, {75, 50}};
 
-		if (value%2 == 0) {
+		if (value % 2 == 1) {
 			pips.add(new Pip(50, 50));
 			value--;
 		}
@@ -89,6 +89,8 @@ public class Face extends Actor{
 	{
 		Vector2 position = new Vector2(shape.x + (shape.width*percentages.x/100f) + (float)pipSprite.getWidth()/2,
 				shape.y + shape.width*percentages.y/100f + (float)pipSprite.getHeight()/2);
+
+		return position;
 	}
 
 	@Override
