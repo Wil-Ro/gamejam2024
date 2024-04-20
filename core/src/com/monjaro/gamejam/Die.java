@@ -1,5 +1,7 @@
 package com.monjaro.gamejam;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class Die extends Actor {
 
 	/*
@@ -22,7 +24,7 @@ public class Die extends Actor {
 	}
 
 	@Override
-	public void render() {
+	public void render(SpriteBatch batch) {
 
 	}
 
