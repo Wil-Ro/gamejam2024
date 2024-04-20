@@ -60,4 +60,12 @@ public class Die extends Actor {
 		}
 	}
 
+	public Face getFace() {
+		return faces[faceIndex];
+	}
+
+	public int getFaceValue() {
+		return getFace().getValue();
+	}
+
 }
