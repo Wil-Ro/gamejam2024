@@ -47,8 +47,17 @@ public class Game extends ApplicationAdapter {
 	public void processInput() {
 		Input input = Gdx.input;
 
-		if (input.isKeyJustPressed(Input.Keys.R)) {
+		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice
 			dice.forEach(Die::roll);
+		}
+
+		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
+			Die die = dice.get(i); //die iterator is looking at
+			int keyCode = Input.Keys.NUM_1 + i; //keycode for the current die, 1, 2...9, 0 on keyboard
+
+			if (input.isKeyJustPressed(keyCode)) { //if key corresponding to die has been pressed
+				die.setLocked(!die.isLocked()); //flip lock state
+			}
 		}
 	}
 
