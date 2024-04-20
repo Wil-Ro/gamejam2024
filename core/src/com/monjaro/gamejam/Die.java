@@ -52,9 +52,7 @@ public class Die extends Actor {
 	}
 
 	public void roll() {
-		if (!locked) {
-			faceIndex = random.nextInt(6);
-		}
+		faceIndex = random.nextInt(6);
 	}
 
 	public void decay() { //remove a pip from all faces of this die

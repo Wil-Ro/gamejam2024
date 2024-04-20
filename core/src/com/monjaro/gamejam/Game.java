@@ -46,8 +46,8 @@ public class Game extends ApplicationAdapter {
 	public void processInput() {
 		Input input = Gdx.input;
 
-		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice
-			dice.forEach(Die::roll);
+		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
+			dice.stream().filter(d -> !d.isLocked()).forEach(Die::roll);
 		}
 
 		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
