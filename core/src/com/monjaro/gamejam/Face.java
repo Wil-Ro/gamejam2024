@@ -1,8 +1,9 @@
 package com.monjaro.gamejam;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Face extends Actor{
 	private void addPipsForValue(int value){
 		int[][] positions = {{25, 25}, {75, 75}, {25, 75}, {75, 25}, {25, 50}, {75, 50}};
 
-		if (value%2 == 0) {
+		if (value % 2 == 1) {
 			pips.add(new Pip(50, 50));
 			value--;
 		}
