@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Face extends Actor{
@@ -18,6 +19,7 @@ public class Face extends Actor{
 
 	private static Texture blankFaceSprite;
 	private static Texture pipSprite;
+
 
 	public Face(int pipCount) {
 		addPipsForValue(pipCount);
@@ -53,7 +55,9 @@ public class Face extends Actor{
 		private final Vector2 location;
 
 		public Pip(float x, float y) {
-			location = new Vector2(x, y);
+			Random rand = new Random();
+			int range = 2;
+			location = new Vector2(x + rand.nextInt(-range, range + 1), y+ rand.nextInt(-range, range + 1));
 		}
 
 		public float getX() {
