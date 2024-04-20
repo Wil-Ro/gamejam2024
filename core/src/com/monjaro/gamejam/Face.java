@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Face extends Actor{
 
-	private Rectangle shape;
+	private Rectangle shape = new Rectangle();
 
 	private final List<Pip> pips = new ArrayList<>();
 
@@ -77,18 +77,19 @@ public class Face extends Actor{
 		shape.setSize(w, h);
 	}
 
-	public void setBlankFaceSprite(Texture sprite){
+	public static void setBlankFaceSprite(Texture sprite){
 		blankFaceSprite = sprite;
 	}
 
-	public void setPipSprite(Texture sprite){
+	public static void setPipSprite(Texture sprite){
 		pipSprite = sprite;
 	}
 
 	public Vector2 getPipLocationFromPercentage(Vector2 percentages)
 	{
-		Vector2 position = new Vector2(shape.x + (shape.width*percentages.x/100f) + (float)pipSprite.getWidth()/2,
-				shape.y + shape.width*percentages.y/100f + (float)pipSprite.getHeight()/2);
+		Vector2 position = new Vector2(
+				shape.x + (shape.width*percentages.x/100f) - (float)pipSprite.getWidth()/2,
+				shape.y + shape.width*percentages.y/100f - (float)pipSprite.getHeight()/2);
 
 		return position;
 	}
