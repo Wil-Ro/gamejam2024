@@ -1,5 +1,7 @@
 package com.monjaro.gamejam;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +13,24 @@ public class Face extends Actor{
 
 	private final List<Pip> pips = new ArrayList<>();
 
+	private static Texture blankFaceSprite;
+	private static Texture pipSprite;
+
 	public Face(int pipCount) {
-		//ro adds pips here
+		addPipsForValue(pipCount);
+	}
+
+	private void addPipsForValue(int value){
+		int[][] positions = {{25, 25}, {75, 75}, {25, 75}, {75, 25}, {25, 50}, {75, 50}};
+
+		if (value%2 == 0) {
+			pips.add(new Pip(50, 50));
+			value--;
+		}
+
+		for (int i = 0; i < value ; i++) {
+			pips.add(new Pip(positions[i][0], positions[i][1]));
+		}
 	}
 
 	public int getValue() {
@@ -29,18 +47,18 @@ public class Face extends Actor{
 
 	public static class Pip {
 
-		private final double x, y;
+		private final float x, y;
 
-		public Pip(double x, double y) {
+		public Pip(float x, float y) {
 			this.x = x;
 			this.y = y;
 		}
 
-		public double getX() {
+		public float getX() {
 			return x;
 		}
 
-		public double getY() {
+		public float getY() {
 			return y;
 		}
 
@@ -62,7 +80,12 @@ public class Face extends Actor{
 
 	@Override
 	public void render(SpriteBatch batch) {
-
+		batch.draw(blankFaceSprite, shape.x, shape.y, shape.width, shape.height);
+		for(Pip pip : pips){
+			batch.draw(pipSprite,
+					shape.x + (shape.width*pip.x/100f),
+					shape.y + (shape.width*pip.y/100f));
+		}
 	}
 
 }

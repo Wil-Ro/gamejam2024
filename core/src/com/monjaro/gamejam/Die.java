@@ -13,6 +13,7 @@ public class Die extends Actor {
 	  5
 	 */
 	private Face[] faces = new Face[6];
+	private int topFace = 0;
 
 	public Die() {
 		int[] pips = {4, 6, 5, 1, 2, 3};
@@ -38,8 +39,6 @@ public class Die extends Actor {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		for (Face face : faces) {
-			face.render(batch);
-		}
+		faces[topFace].render(batch);
 	}
 }
