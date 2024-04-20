@@ -3,6 +3,10 @@ package com.monjaro.gamejam;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import javax.print.attribute.standard.PrinterIsAcceptingJobs;
+import java.util.List;
+import java.util.Random;
+
 public class Die extends Actor {
 
 	private Rectangle shape;
@@ -12,6 +16,9 @@ public class Die extends Actor {
 	  5
 	 */
 	private Face[] faces = new Face[6];
+	private int faceIndex = 3;
+
+	private final Random random = new Random(); //TODO use central random
 
 	public Die() {
 		int[] pips = {4, 6, 5, 1, 2, 3};
@@ -43,11 +50,15 @@ public class Die extends Actor {
 	}
 
 	public void roll() {
-
+		faceIndex = random.nextInt(6);
 	}
 
-	public void decay() {
-
+	public void decay() { //remove a pip from all faces of this die
+		for (Face face : faces) {
+			List<Face.Pip> pips = face.getPips();
+			Face.Pip decayed = pips.get(random.nextInt());
+			face.removePip(decayed);
+		}
 	}
 
 }
