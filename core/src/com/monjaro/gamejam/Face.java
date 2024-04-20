@@ -8,16 +8,18 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Face extends Actor{
 
-	private Rectangle shape;
+	private Rectangle shape = new Rectangle();
 
 	private final List<Pip> pips = new ArrayList<>();
 
 	private static Texture blankFaceSprite;
 	private static Texture pipSprite;
+
 
 	public Face(int pipCount) {
 		addPipsForValue(pipCount);
@@ -53,7 +55,9 @@ public class Face extends Actor{
 		private final Vector2 location;
 
 		public Pip(float x, float y) {
-			location = new Vector2(x, y);
+			Random rand = new Random();
+			int range = 2;
+			location = new Vector2(x + rand.nextInt(-range, range + 1), y+ rand.nextInt(-range, range + 1));
 		}
 
 		public float getX() {
@@ -77,18 +81,19 @@ public class Face extends Actor{
 		shape.setSize(w, h);
 	}
 
-	public void setBlankFaceSprite(Texture sprite){
+	public static void setBlankFaceSprite(Texture sprite){
 		blankFaceSprite = sprite;
 	}
 
-	public void setPipSprite(Texture sprite){
+	public static void setPipSprite(Texture sprite){
 		pipSprite = sprite;
 	}
 
 	public Vector2 getPipLocationFromPercentage(Vector2 percentages)
 	{
-		Vector2 position = new Vector2(shape.x + (shape.width*percentages.x/100f) + (float)pipSprite.getWidth()/2,
-				shape.y + shape.width*percentages.y/100f + (float)pipSprite.getHeight()/2);
+		Vector2 position = new Vector2(
+				shape.x + (shape.width*percentages.x/100f) - (float)pipSprite.getWidth()/2,
+				shape.y + shape.width*percentages.y/100f - (float)pipSprite.getHeight()/2);
 
 		return position;
 	}

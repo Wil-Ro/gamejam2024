@@ -29,6 +29,17 @@ public class Die extends Actor {
 		shape = new Rectangle();
 	}
 
+	public Die(float x, float y, float width, float height) {
+		int[] pips = {4, 6, 5, 1, 2, 3};
+		for (int i = 0; i < faces.length; i++) {
+			faces[i] = new Face(pips[i]);
+			faces[i].setPosition(x, y);
+			faces[i].setSize(width, height);
+		}
+		shape = new Rectangle(x, y, width, height);
+
+	}
+
 	public void setPosition(float x, float y){
 		shape.setX(x);
 		shape.setY(y);

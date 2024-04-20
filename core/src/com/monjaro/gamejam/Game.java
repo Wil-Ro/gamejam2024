@@ -33,8 +33,11 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
 		img = new Texture("badlogic.jpg");
 
-		for (int i = 0; i < 5; i++) {
-			dice.add(new Die());
+		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
+		Face.setPipSprite(new Texture("pip.png"));
+
+		for (int i = 1; i <= 5; i++) {
+			dice.add(new Die((i*80), 20, 64, 64));
 		}
 	}
 
@@ -77,8 +80,7 @@ public class Game extends ApplicationAdapter {
 		//TODO debug
 		int x = 100;
 		for (Die die : dice) {
-			batch.setColor(Color.WHITE);
-			font.draw(batch, String.valueOf(die.getFaceValue()), x += 50, 100);
+			die.render(batch);
 		}
 		//-----
 
