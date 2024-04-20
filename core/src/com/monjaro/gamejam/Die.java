@@ -28,4 +28,12 @@ public class Die extends Actor {
 
 	}
 
+	public void roll() {
+
+	}
+
+	public void decay() {
+
+	}
+
 }
