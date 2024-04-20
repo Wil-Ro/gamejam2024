@@ -5,13 +5,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import jdk.vm.ci.hotspot.JFR;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Game extends ApplicationAdapter {
+
+	private final Set<Actor> actors = new HashSet<>();
 
 	private SpriteBatch batch;
 	private Texture img;
 
-	private static int TICKS_PER_SECOND;
+	private final static int TICKS_PER_SECOND = 60;
 	private double tickProgress = 0;
 
 	@Override
@@ -21,20 +29,22 @@ public class Game extends ApplicationAdapter {
 	}
 
 	public void tick() {
-
+		actors.forEach(Actor::tick);
 	}
 
 	@Override
 	public void render() {
-		Gdx.graphics.getDeltaTime();
+		tickProgress += Gdx.graphics.getDeltaTime() / TICKS_PER_SECOND;
 		while (tickProgress >= 1) { //tick as many times as needed
 			tick();
 			tickProgress--;
 		}
 
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
+
+		actors.forEach(a -> a.render(batch));
+
 		batch.end();
 	}
 	
@@ -42,6 +52,14 @@ public class Game extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		img.dispose();
+	}
+
+	private void addActor(Actor actor) {
+		actors.add(actor);
+	}
+
+	private void removeActor(Actor actor) {
+		actors.remove(actor);
 	}
 
 }

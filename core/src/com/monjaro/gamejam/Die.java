@@ -1,6 +1,8 @@
 package com.monjaro.gamejam;
 
+
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Die extends Actor {
 
@@ -35,10 +37,9 @@ public class Die extends Actor {
 	}
 
 	@Override
-	public void render() {
-		for (Face face : faces){
-			face.render();
+	public void render(SpriteBatch batch) {
+		for (Face face : faces) {
+			face.render(batch);
 		}
 	}
-
 }
