@@ -3,9 +3,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 public class Face extends Actor{
 
@@ -47,20 +50,21 @@ public class Face extends Actor{
 
 	public static class Pip {
 
-		private final float x, y;
+		private final Vector2 location;
 
 		public Pip(float x, float y) {
-			this.x = x;
-			this.y = y;
+			location = new Vector2(x, y);
 		}
 
 		public float getX() {
-			return x;
+			return location.x;
 		}
 
 		public float getY() {
-			return y;
+			return location.y;
 		}
+
+		public Vector2 getVectorLocation(){return location;}
 
 	}
 
@@ -73,6 +77,20 @@ public class Face extends Actor{
 		shape.setSize(w, h);
 	}
 
+	public void setBlankFaceSprite(Texture sprite){
+		blankFaceSprite = sprite;
+	}
+
+	public void setPipSprite(Texture sprite){
+		pipSprite = sprite;
+	}
+
+	public Vector2 getPipLocationFromPercentage(Vector2 percentages)
+	{
+		Vector2 position = new Vector2(shape.x + (shape.width*percentages.x/100f) + (float)pipSprite.getWidth()/2,
+				shape.y + shape.width*percentages.y/100f + (float)pipSprite.getHeight()/2);
+	}
+
 	@Override
 	public void tick() {
 
@@ -82,9 +100,10 @@ public class Face extends Actor{
 	public void render(SpriteBatch batch) {
 		batch.draw(blankFaceSprite, shape.x, shape.y, shape.width, shape.height);
 		for(Pip pip : pips){
+			Vector2 position = getPipLocationFromPercentage(pip.getVectorLocation());
 			batch.draw(pipSprite,
-					shape.x + (shape.width*pip.x/100f),
-					shape.y + (shape.width*pip.y/100f));
+					position.x,
+					position.y);
 		}
 	}
 
