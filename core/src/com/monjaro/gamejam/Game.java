@@ -6,6 +6,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.monjaro.gamejam.segment.DualSegment;
+import com.monjaro.gamejam.segment.KinSegment;
+import com.monjaro.gamejam.segment.Segment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +20,7 @@ public class Game extends ApplicationAdapter {
 	private final Set<Actor> actors = new HashSet<>();
 
 	private final List<Die> dice = new ArrayList<>();
+	private final List<Segment> segments = new ArrayList<>();
 
 	private SpriteBatch batch;
 	private Texture img;
@@ -35,6 +39,12 @@ public class Game extends ApplicationAdapter {
 		for (int i = 1; i <= 5; i++) {
 			dice.add(new Die((i*80), 20, 64, 64));
 		}
+
+		for (int i = 1; i <= 5; i++) {
+			segments.add(new KinSegment(i));
+		}
+		segments.add(new DualSegment(false));
+		segments.add(new DualSegment(true));
 	}
 
 	public void tick() {
@@ -48,7 +58,13 @@ public class Game extends ApplicationAdapter {
 
 		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
 			dice.stream().filter(d -> !d.isLocked()).forEach(Die::roll);
+
+			System.out.println("=".repeat(100));
+			for (Segment segment : segments) {
+				System.out.println(segment.getName() + ": " + segment.isDestroyedBy(dice));
+			}
 		}
+
 
 		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
 			Die die = dice.get(i); //die iterator is looking at
