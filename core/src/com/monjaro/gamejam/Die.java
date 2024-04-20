@@ -17,9 +17,9 @@ public class Die extends Actor {
 
 	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
+	private boolean locked = false;
 
 	private final Random random = new Random(); //TODO use central random
-
 
 	public Die() {
 		int[] pips = {4, 6, 5, 1, 2, 3};
@@ -60,7 +60,9 @@ public class Die extends Actor {
 	}
 
 	public void roll() {
-		faceIndex = random.nextInt(6);
+		if (!locked) {
+			faceIndex = random.nextInt(6);
+		}
 	}
 
 	public void decay() { //remove a pip from all faces of this die
@@ -77,6 +79,14 @@ public class Die extends Actor {
 
 	public int getFaceValue() {
 		return getFace().getValue();
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 
 }
