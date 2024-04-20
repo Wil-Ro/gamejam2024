@@ -18,10 +18,6 @@ public abstract class Segment {
 
 	public abstract boolean isDestroyedBy(List<Die> die);
 
-	public String getName() {
-		return name;
-	}
-
 	protected Map<Integer, Integer> countValues(List<Die> dice) {
 		Map<Integer, Integer> counts = new HashMap<>();
 
@@ -33,6 +29,14 @@ public abstract class Segment {
 		}
 
 		return counts;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public boolean isDestroyed() {
+		return destroyed;
 	}
 
 }

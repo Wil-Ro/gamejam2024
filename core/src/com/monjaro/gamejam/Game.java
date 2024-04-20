@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.segment.DualSegment;
@@ -23,6 +24,7 @@ public class Game extends ApplicationAdapter {
 	private final List<Segment> segments = new ArrayList<>();
 
 	private SpriteBatch batch;
+	private BitmapFont font;
 	private Texture img;
 
 	private final static int TICKS_PER_SECOND = 60;
@@ -31,6 +33,8 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
+		font = new BitmapFont();
+		font.getData().markupEnabled = true;
 		img = new Texture("badlogic.jpg");
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
@@ -65,7 +69,6 @@ public class Game extends ApplicationAdapter {
 			}
 		}
 
-
 		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
 			Die die = dice.get(i); //die iterator is looking at
 			int keyCode = Input.Keys.NUM_1 + i; //keycode for the current die, 1, 2...9, 0 on keyboard
@@ -92,6 +95,15 @@ public class Game extends ApplicationAdapter {
 		//TODO debug
 		for (Die die : dice) {
 			die.render(batch);
+		}
+
+		int x = 50;
+		for (Segment segment : segments) {
+			String prefix = "[#9E65A8]";
+			if (segment.isDestroyed()) prefix = "[#EBE5EC]";
+			else if (segment.isDestroyedBy(dice)) prefix = "[#528154]";
+
+			font.draw(batch, prefix + segment.getName(), x += 75, Gdx.graphics.getHeight() - 100);
 		}
 		//-----
 
