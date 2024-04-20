@@ -1,24 +1,19 @@
 package com.monjaro.gamejam;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-
 import java.util.List;
 import java.util.Random;
 
 public class Die extends Actor {
 
 	private Transform transform;
-	private int rotation;
+
 	/*
 	  0
 	1 2 3 4
 	  5
 	 */
-
 	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
 	private boolean locked = false;
@@ -27,14 +22,6 @@ public class Die extends Actor {
 
 	private final Random random = new Random(); //TODO use central random
 
-	public Die() {
-		transform = new Transform();
-
-		int[] pips = {4, 6, 5, 1, 2, 3};
-		for (int i = 0; i < faces.length; i++) {
-			faces[i] = new Face(pips[i], transform);
-		}
-	}
 
 	public Die(float x, float y, float width, float height) {
 		transform = new Transform(x, y, width, height);
@@ -65,9 +52,7 @@ public class Die extends Actor {
 	}
 
 	public void roll() {
-		if (!locked) {
-			faceIndex = random.nextInt(6);
-		}
+		faceIndex = random.nextInt(6);
 	}
 
 	public static void setLockedSprite(Texture sprite){
@@ -88,6 +73,10 @@ public class Die extends Actor {
 
 	public int getFaceValue() {
 		return getFace().getValue();
+	}
+
+	public boolean isBlank() {
+		return getFaceValue() <= 0;
 	}
 
 	public boolean isLocked() {
