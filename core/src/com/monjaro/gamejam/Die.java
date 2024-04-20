@@ -1,21 +1,20 @@
 package com.monjaro.gamejam;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
-import javax.print.attribute.standard.PrinterIsAcceptingJobs;
 import java.util.List;
 import java.util.Random;
 
 public class Die extends Actor {
 
-	private Rectangle shape;
+	private final Rectangle shape;
 	/*
 	  0
 	1 2 3 4
 	  5
 	 */
-	private Face[] faces = new Face[6];
+	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
 
 	private final Random random = new Random(); //TODO use central random
