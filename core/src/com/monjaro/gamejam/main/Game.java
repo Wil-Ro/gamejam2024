@@ -14,8 +14,6 @@ import com.monjaro.gamejam.segment.*;
 
 import java.util.*;
 
-import static com.badlogic.gdx.graphics.GL20.*;
-
 public class Game extends ApplicationAdapter {
 
 	private final List<Die> dice = new ArrayList<>();
@@ -92,9 +90,15 @@ public class Game extends ApplicationAdapter {
 	public void processInput() {
 		Input input = Gdx.input;
 
-		if (input.isKeyJustPressed(Input.Keys.R) && round.getRerolls() > 0) { //reroll dice that aren't locked
-			reroll();
-			round.reduceRerolls(1);
+		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
+			if (round.getRerolls() > 0) {
+				reroll();
+				round.reduceRerolls(1);
+			} else {
+				for (int i = 0; i < 6; i++) {
+					dice.forEach(Die::decay);
+				}
+			}
 		}
 
 		dieNet.setVisible(input.isKeyPressed(Input.Keys.CONTROL_LEFT));
@@ -172,6 +176,7 @@ public class Game extends ApplicationAdapter {
 		}
 
 		int y = Gdx.graphics.getHeight() / 3 * 2 - 25;
+		font.draw(batch, "[#9E65A8] ROUND " + roundNumber, 100, y -= 20);
 		for (Decay decay : round.getDecays()) {
 			font.draw(batch, "[#9E65A8]" + decay.getDescription(), 100, y -= 20);
 		}
@@ -194,9 +199,12 @@ public class Game extends ApplicationAdapter {
 	}
 
 	public void nextRound() {
-		round = generateRound(++roundNumber);
+		if (roundNumber < 10) {
 
-		generateShope();
+			round = generateRound(++roundNumber);
+
+			generateShope();
+		}
 	}
 
 	public Round generateRound(int difficulty) {

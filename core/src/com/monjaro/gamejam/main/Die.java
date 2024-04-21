@@ -97,11 +97,11 @@ public class Die extends Actor {
 		if (selected != this.selected)
 		{
 			if (selected) {
-				transform.y += 64;
+				transform.y += 32;
 				transform.rotation = 20;
 			}
 			else{
-				transform.y -= 64;
+				transform.y -= 32;
 				transform.rotation = 0;
 			}
 		} // terrible
