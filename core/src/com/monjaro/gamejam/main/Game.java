@@ -28,7 +28,6 @@ public class Game extends ApplicationAdapter {
 	private final static int TICKS_PER_SECOND = 60;
 	private double tickProgress = 0;
 
-
 	private Round round;
 	private UI ui;
 
@@ -40,7 +39,7 @@ public class Game extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 
 		ui = new UI(50, 280, 10);
-		round = new Round(10);
+		round = new Round(new ArrayList<>(), 10);
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
