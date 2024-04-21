@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class UI extends Actor{
     private Transform position;
-    private Texture
 
     public void setPosition(int x, int y){
         position.x = x;
