@@ -16,12 +16,11 @@ public class Die extends Actor {
 	 */
 	private final Face[] faces = new Face[6];
 	private int faceIndex = 3;
-	private boolean locked = false;
+	private boolean selected = false;
 
 	private static Texture lockedSprite;
 
 	private final Random random = new Random(); //TODO use central random
-
 
 	public Die(float x, float y, float width, float height) {
 		transform = new Transform(x, y, width, height);
@@ -79,14 +78,14 @@ public class Die extends Actor {
 		return getFaceValue() <= 0;
 	}
 
-	public boolean isLocked() {
-		return locked;
+	public boolean isSelected() {
+		return selected;
 	}
 
-	public void setLocked(boolean locked) {
-		if (locked != this.locked)
+	public void setSelected(boolean selected) {
+		if (selected != this.selected)
 		{
-			if (locked) {
+			if (selected) {
 				transform.y += 64;
 				transform.rotation = 20;
 			}
@@ -96,7 +95,7 @@ public class Die extends Actor {
 			}
 		} // terrible
 
-		this.locked = locked;
+		this.selected = selected;
 	}
 
 }

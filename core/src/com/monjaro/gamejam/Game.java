@@ -59,7 +59,7 @@ public class Game extends ApplicationAdapter {
 		Input input = Gdx.input;
 
 		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
-			dice.stream().filter(d -> !d.isLocked()).forEach(Die::roll);
+			dice.stream().filter(d -> !d.isSelected()).forEach(Die::roll);
 
 			System.out.println("=".repeat(100));
 			for (Segment segment : segments) {
@@ -72,7 +72,7 @@ public class Game extends ApplicationAdapter {
 			int keyCode = Input.Keys.NUM_1 + i; //keycode for the current die, 1, 2...9, 0 on keyboard
 
 			if (input.isKeyJustPressed(keyCode)) { //if key corresponding to die has been pressed
-				die.setLocked(!die.isLocked()); //flip lock state
+				die.setSelected(!die.isSelected()); //flip lock state
 			}
 		}
 	}
@@ -97,7 +97,7 @@ public class Game extends ApplicationAdapter {
 		for (Segment segment : segments) {
 			String prefix = "[#9E65A8]";
 			if (segment.isDestroyed()) prefix = "[#EBE5EC]";
-			else if (segment.isDestroyedBy(dice)) prefix = "[#528154]";
+			else if (segment.isDestroyedBy(getSelectedDice())) prefix = "[#528154]";
 
 			font.draw(batch, prefix + segment.getName(), x += 75, Gdx.graphics.getHeight() - 100);
 		}
@@ -110,6 +110,12 @@ public class Game extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		img.dispose();
+	}
+
+	public List<Die> getSelectedDice() {
+		return dice.stream()
+				.filter(d -> !d.isSelected())
+				.toList();
 	}
 
 }
