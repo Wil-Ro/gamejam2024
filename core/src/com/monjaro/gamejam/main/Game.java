@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.SegmentUI;
-import com.monjaro.gamejam.segment.DualSegment;
-import com.monjaro.gamejam.segment.KinSegment;
-import com.monjaro.gamejam.segment.OlympicSegment;
-import com.monjaro.gamejam.segment.Segment;
+import com.monjaro.gamejam.segment.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +38,7 @@ public class Game extends ApplicationAdapter {
 		segUi = new SegmentUI();
 
 		ui = new UI(this, 50, 280);
-		round = new Round(List.of(new OlympicSegment(1), new OlympicSegment(3), new KinSegment(3), new DualSegment(false)), List.of(new ParityDecay(true)), 5);
+		round = new Round(List.of(new OlympicSegment(1), new OlympicSegment(3), new KinSegment(3), new DualSegment(false)), List.of(new TallDecay()), 5);
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
