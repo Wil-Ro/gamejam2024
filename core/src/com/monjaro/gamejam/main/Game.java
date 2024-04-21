@@ -29,6 +29,8 @@ public class Game extends ApplicationAdapter {
 
 	private Round round;
 	private int roundNumber = 0;
+	private List<Face> shop = new ArrayList<>();
+
 	private UI ui;
 	private SegmentUI segUi;
 
@@ -191,6 +193,14 @@ public class Game extends ApplicationAdapter {
 
 	public Round getRound() {
 		return round;
+	}
+
+	private void fillShop() {
+		
+	}
+
+	public List<Face> getShop() {
+		return shop;
 	}
 
 }
