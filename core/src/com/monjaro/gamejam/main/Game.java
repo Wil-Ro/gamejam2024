@@ -85,6 +85,7 @@ public class Game extends ApplicationAdapter {
 		processInput();
 
 		fallingPips.forEach(Actor::tick);
+		fallingPips.removeIf(FallingPip::isOffScreen);
 	}
 
 	public void processInput() {
@@ -161,13 +162,13 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 
-		for (FallingPip pip : fallingPips) if (!pip.isOnTop()) pip.render(batch);
-
 		for (Die die : dice) {
 			die.render(batch);
 		}
 
-		for (FallingPip pip : fallingPips) if (pip.isOnTop()) pip.render(batch); //on top
+		for (FallingPip pip : fallingPips) { //on top
+			pip.render(batch);
+		}
 
 		int y = Gdx.graphics.getHeight() / 3 * 2 - 25;
 		for (Decay decay : round.getDecays()) {
