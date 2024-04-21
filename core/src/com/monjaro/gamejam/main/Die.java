@@ -79,6 +79,11 @@ public class Die extends Actor {
 		return getFaceValue() <= 0;
 	}
 
+	public void setFace(Face face) {
+		faces[faceIndex] = face;
+		face.setTransform(transform);
+	}
+
 	public boolean isSelected() {
 		return selected;
 	}

@@ -85,6 +85,10 @@ public class Face extends Actor{
 		transform.setSize(w, h);
 	}
 
+	public void setTransform(Transform transform) {
+		this.transform = transform;
+	}
+
 	public static void setBlankFaceSprite(Texture sprite){
 		blankFaceSprite = sprite;
 	}
@@ -115,6 +119,7 @@ public class Face extends Actor{
 		face.setOrigin(face.getWidth()/2, face.getHeight()/2);
 		face.rotate(transform.getRotation());
 		face.setPosition(transform.x-face.getWidth()/2, transform.y-face.getHeight()/2);
+
 		face.draw(batch);
 
 		for(Pip pip : pips){

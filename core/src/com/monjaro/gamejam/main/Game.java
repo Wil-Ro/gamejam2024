@@ -101,13 +101,29 @@ public class Game extends ApplicationAdapter {
 				}
 			}
 		} else {
-			for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
+			int shopeIndex = -1;
+			if (input.isKeyJustPressed(Input.Keys.I)) shopeIndex = 0;
+			else if (input.isKeyJustPressed(Input.Keys.O)) shopeIndex = 1;
+			else if (input.isKeyJustPressed(Input.Keys.P)) shopeIndex = 2;
+
+			List<Die> selected = getSelectedDice();
+			if (selected.size() == 1 && shopeIndex != -1) {
+				Face face = getShopeIndex(shopeIndex);
+
+				if (face != null) {
+					Die die = selected.get(0);
+					die.setFace(face);
+					removeShopeIndex(shopeIndex);
+				}
+			}
+
+			for (int i = 0; i < dice.size(); i++) { //buy for or select dice, iterating over for each keycode
 				int keyCode = Input.Keys.NUM_1 + i; //keycode for the current die, 1, 2...9, 0 on keyboard
 
-				if (input.isKeyJustPressed(keyCode)) { //if key corresponding to die has been pressed
-					Die die = dice.get(i); //die iterator is looking at
-					die.setSelected(!die.isSelected()); //flip lock state
-				}
+				if (!input.isKeyJustPressed(keyCode)) continue;
+
+				Die die = dice.get(i); //die iterator is looking at
+				die.setSelected(!die.isSelected()); //flip lock state
 			}
 		}
 	}
@@ -210,6 +226,10 @@ public class Game extends ApplicationAdapter {
 			Face ware = new Face(1 + random.nextInt(6), new Transform(x += 96, y, 64, 64));//TODO RO FIX plz i beg!!!!
 			shope.add(ware);
 		}
+	}
+
+	public Face getShopeIndex(int index) {
+		return shope.get(index);
 	}
 
 	public void removeShopeIndex(int index) {
