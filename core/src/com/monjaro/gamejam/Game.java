@@ -27,6 +27,10 @@ public class Game extends ApplicationAdapter {
 	private final static int TICKS_PER_SECOND = 60;
 	private double tickProgress = 0;
 
+
+	private RoundData roundData;
+	private UI ui;
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
@@ -34,9 +38,13 @@ public class Game extends ApplicationAdapter {
 		font.getData().markupEnabled = true;
 		img = new Texture("badlogic.jpg");
 
+		ui = new UI(50, 280, 10);
+		roundData = new RoundData(10);
+
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
 		Die.setLockedSprite(new Texture("locked_die_border.png"));
+		UI.setRerollTexture(new Texture("reroll_symbol.png"));
 
 		Vector2 dieSize = new Vector2();
 		float divide = Gdx.graphics.getWidth() / 6f;
@@ -53,13 +61,16 @@ public class Game extends ApplicationAdapter {
 
 	public void tick() {
 		processInput();
+
+		ui.setRemainingRerolls(roundData.getRerolls());
 	}
 
 	public void processInput() {
 		Input input = Gdx.input;
 
-		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
+		if (input.isKeyJustPressed(Input.Keys.R) && roundData.getRerolls() > 0) { //reroll dice that aren't locked
 			dice.stream().filter(d -> !d.isSelected()).forEach(Die::roll);
+			roundData.reduceRerolls(1);
 
 			System.out.println("=".repeat(100));
 			for (Segment segment : segments) {
@@ -102,6 +113,8 @@ public class Game extends ApplicationAdapter {
 			font.draw(batch, prefix + segment.getName(), x += 75, Gdx.graphics.getHeight() - 100);
 		}
 		//-----
+
+		ui.render(batch);
 
 		batch.end();
 	}
