@@ -71,11 +71,13 @@ public class Game extends ApplicationAdapter {
 				if (input.isKeyJustPressed(keyCode)) {
 					Segment segment = round.getSegments().get(i);
 
-					if (segment.isDestroyedBy(getSelectedDice())) { //if can be destroyed with selected
+					if (!segment.isDestroyed() && segment.isDestroyedBy(getSelectedDice())) { //if can be destroyed with selected
 						segment.destroy();
+
 						round.getDecays().forEach(d -> d.getDecayed(getSelectedDice()).forEach(Die::decay)); //apply all decay rules
-						dice.forEach(d -> d.setSelected(false));
-//						reroll();
+
+						dice.forEach(d -> d.setSelected(false)); //unselect all dice
+						reroll(); //reroll
 					}
 				}
 			}
