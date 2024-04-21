@@ -188,10 +188,6 @@ public class Game extends ApplicationAdapter {
 			default -> new TallDecay();
 		});
 
-		for (Segment segment : segments) {
-			System.out.println(segment.getName());
-		}
-
 		return new Round(segments, decays, 5);
 	}
 
