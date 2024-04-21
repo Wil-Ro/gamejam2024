@@ -95,6 +95,10 @@ public class Face extends Actor{
 		this.transform = transform;
 	}
 
+	public static Texture getPipSprite() {
+		return pipSprite;
+	}
+
 	public static void setBlankFaceSprite(Texture sprite){
 		blankFaceSprite = sprite;
 	}

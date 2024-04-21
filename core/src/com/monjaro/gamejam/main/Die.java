@@ -7,7 +7,8 @@ import java.util.Random;
 
 public class Die extends Actor {
 
-	private Transform transform;
+	private final Game game;
+	private final Transform transform;
 
 	/*
 	  0
@@ -22,7 +23,9 @@ public class Die extends Actor {
 
 	private final Random random = new Random(); //TODO use central random
 
-	public Die(float x, float y, float width, float height) {
+	public Die(Game game, float x, float y, float width, float height) {
+		this.game = game;
+
 		transform = new Transform(x, y, width, height);
 
 		int[] pips = {4, 6, 5, 1, 2, 3};
@@ -64,6 +67,8 @@ public class Die extends Actor {
 			if (pips.isEmpty()) continue;
 			Face.Pip decayed = pips.get(random.nextInt(pips.size()));
 			face.removePip(decayed);
+
+			game.addFallingPip(new FallingPip(new Transform(transform.getX(), transform.getY(), 0, 0), face.equals(getFace())));
 		}
 	}
 
