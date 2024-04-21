@@ -68,7 +68,7 @@ public class Game extends ApplicationAdapter {
 
 		if (input.isKeyJustPressed(Input.Keys.R) && round.getRerolls() > 0) { //reroll dice that aren't locked
 			reroll();
-			round.reduceRerolls(0);
+			round.reduceRerolls(1);
 		}
 
 		if (input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
@@ -78,11 +78,13 @@ public class Game extends ApplicationAdapter {
 				if (input.isKeyJustPressed(keyCode)) {
 					Segment segment = round.getSegments().get(i);
 
-					if (segment.isDestroyedBy(getSelectedDice())) { //if can be destroyed with selected
+					if (!segment.isDestroyed() && segment.isDestroyedBy(getSelectedDice())) { //if can be destroyed with selected
 						segment.destroy();
+
 						round.getDecays().forEach(d -> d.getDecayed(getSelectedDice()).forEach(Die::decay)); //apply all decay rules
-						dice.forEach(d -> d.setSelected(false));
-//						reroll();
+
+						dice.forEach(d -> d.setSelected(false)); //unselect all dice
+						reroll(); //reroll
 					}
 				}
 			}

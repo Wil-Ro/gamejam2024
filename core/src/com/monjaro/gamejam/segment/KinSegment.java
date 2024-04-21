@@ -36,4 +36,14 @@ public class KinSegment extends Segment { //multiple dice of the same value
 		return false;
 	}
 
+	@Override
+	public int getSpriteColumn() {
+		return 0;
+	}
+
+	@Override
+	public int getSpriteRow() {
+		return 0;
+	}
+
 }

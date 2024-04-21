@@ -55,4 +55,14 @@ public class DualSegment extends Segment {
 				&& (!firstTrio || countCounts.getOrDefault(3, 0) >= 1);
 	}
 
+	@Override
+	public int getSpriteColumn() {
+		return 0;
+	}
+
+	@Override
+	public int getSpriteRow() {
+		return 0;
+	}
+
 }
