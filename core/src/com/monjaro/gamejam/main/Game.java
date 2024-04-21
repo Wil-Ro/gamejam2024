@@ -44,7 +44,8 @@ public class Game extends ApplicationAdapter {
 
 		ui = new UI(this, 50, 280);
 
-		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
+		Face.setBlankFaceSprite(new Texture("blank_die_faces_sheet.png"));
+
 		Face.setPipSprite(new Texture("pip.png"));
 		Die.setLockedSprite(new Texture("locked_die_border.png"));
 		UI.setRerollTexture(new Texture("reroll_symbol.png"));
