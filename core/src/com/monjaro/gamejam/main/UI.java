@@ -10,8 +10,6 @@ public class UI extends Actor{
     private final Transform position;
     private static Texture rerollTexture;
 
-    private int rerolls;
-
     public UI(Game game, int x, int y) {
         this.game = game;
         position = new Transform(x, y, 0, 0);
@@ -20,10 +18,6 @@ public class UI extends Actor{
     public void setPosition(int x, int y){
         position.x = x;
         position.y = y;
-    }
-
-    public void setRerolls(int x){
-        rerolls = x;
     }
 
     public static void setRerollTexture(Texture texture){rerollTexture = texture;}
@@ -42,4 +36,5 @@ public class UI extends Actor{
             batch.setColor(Color.WHITE);
         }
     }
+
 }

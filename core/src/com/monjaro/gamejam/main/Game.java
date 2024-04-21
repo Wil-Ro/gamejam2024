@@ -28,6 +28,7 @@ public class Game extends ApplicationAdapter {
 	private double tickProgress = 0;
 
 	private Round round;
+	private int roundNumber = 0;
 	private UI ui;
 	private SegmentUI segUi;
 
@@ -43,7 +44,8 @@ public class Game extends ApplicationAdapter {
 
 		ui = new UI(this, 50, 280);
 
-		round = generateRound(0);
+		reroll();
+		nextRound();
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
@@ -60,8 +62,6 @@ public class Game extends ApplicationAdapter {
 
 	public void tick() {
 		processInput();
-
-		ui.setRerolls(round.getRerolls());
 	}
 
 	public void processInput() {
@@ -86,6 +86,10 @@ public class Game extends ApplicationAdapter {
 
 						dice.forEach(d -> d.setSelected(false)); //unselect all dice
 						reroll(); //reroll
+
+						if (round.getSegments().stream().allMatch(Segment::isDestroyed)) { //if all segments are destroyed, next round
+							nextRound();
+						}
 					}
 				}
 			}
@@ -146,6 +150,10 @@ public class Game extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		img.dispose();
+	}
+
+	public void nextRound() {
+		round = generateRound(++roundNumber);
 	}
 
 	public Round generateRound(int difficulty) {
