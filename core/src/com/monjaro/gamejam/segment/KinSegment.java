@@ -37,6 +37,11 @@ public class KinSegment extends Segment { //multiple dice of the same value
 	}
 
 	@Override
+	public int getCost() {
+		return (int) (0.5 * requirement * (requirement + 1));
+	}
+
+	@Override
 	public int getSpriteColumn() {
 		return 0;
 	}

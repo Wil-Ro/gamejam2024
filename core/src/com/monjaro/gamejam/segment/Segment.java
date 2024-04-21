@@ -39,6 +39,8 @@ public abstract class Segment {
 		return destroyed;
 	}
 
+	public abstract int getCost(); //difficulty cost
+
 	public abstract int getSpriteColumn();
 
 	public abstract int getSpriteRow();

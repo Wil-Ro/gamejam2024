@@ -48,6 +48,12 @@ public class OlympicSegment extends Segment {
 	}
 
 	@Override
+	public int getCost() {
+		int x = length;
+		return (int) (0.5 * x * (x - 1));
+	}
+
+	@Override
 	public int getSpriteColumn() {
 		return 0;
 	}

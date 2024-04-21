@@ -56,6 +56,11 @@ public class DualSegment extends Segment {
 	}
 
 	@Override
+	public int getCost() {
+		return firstTrio ? 10 : 6;
+	}
+
+	@Override
 	public int getSpriteColumn() {
 		return 0;
 	}

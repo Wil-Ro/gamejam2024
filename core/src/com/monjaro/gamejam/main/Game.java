@@ -11,7 +11,9 @@ import com.monjaro.gamejam.SegmentUI;
 import com.monjaro.gamejam.segment.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class Game extends ApplicationAdapter {
 
@@ -38,7 +40,7 @@ public class Game extends ApplicationAdapter {
 		segUi = new SegmentUI();
 
 		ui = new UI(this, 50, 280);
-		round = new Round(List.of(new OlympicSegment(1), new OlympicSegment(3), new KinSegment(3), new DualSegment(false)), List.of(new TallDecay()), 5);
+		round = generateRound(0);
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
@@ -139,6 +141,44 @@ public class Game extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		img.dispose();
+	}
+
+	public Round generateRound(int difficulty) {
+		Random random = new Random();
+		int points = 5 + difficulty * 3;
+
+		List<Segment> segments = new ArrayList<>();
+		List<Decay> decays = new ArrayList<>();
+
+		List<Segment> pool = new ArrayList<>();
+		for (int i = 2; i <= 5; i++) {
+			for (int j = i; j <= 5; j++) {
+				pool.add(new KinSegment(i));
+				pool.add(new OlympicSegment(i));
+			}
+		}
+		for (boolean b : new boolean[] {true, false}) pool.add(new DualSegment(b));
+
+		pool.sort(Comparator.comparingInt(Segment::getCost).reversed());
+
+		for (Segment segment : pool) {
+			if (random.nextFloat() > (float) segment.getCost() / points) {
+				segments.add(segment);
+				points -= segment.getCost();
+			}
+		}
+
+		decays.add(switch (random.nextInt(3)) {
+			case 0 -> new ParityDecay(false);
+			case 1 -> new ParityDecay(true);
+			default -> new TallDecay();
+		});
+
+		for (Segment segment : segments) {
+			System.out.println(segment.getName());
+		}
+
+		return new Round(segments, decays, 5);
 	}
 
 	public List<Die> getSelectedDice() {
