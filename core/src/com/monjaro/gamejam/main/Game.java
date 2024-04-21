@@ -29,7 +29,7 @@ public class Game extends ApplicationAdapter {
 	private double tickProgress = 0;
 
 
-	private RoundData roundData;
+	private Round round;
 	private UI ui;
 
 	@Override
@@ -40,7 +40,7 @@ public class Game extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 
 		ui = new UI(50, 280, 10);
-		roundData = new RoundData(10);
+		round = new Round(10);
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
@@ -66,15 +66,15 @@ public class Game extends ApplicationAdapter {
 	public void tick() {
 		processInput();
 
-		ui.setRemainingRerolls(roundData.getRerolls());
+		ui.setRemainingRerolls(round.getRerolls());
 	}
 
 	public void processInput() {
 		Input input = Gdx.input;
 
-		if (input.isKeyJustPressed(Input.Keys.R) && roundData.getRerolls() > 0) { //reroll dice that aren't locked
+		if (input.isKeyJustPressed(Input.Keys.R) && round.getRerolls() > 0) { //reroll dice that aren't locked
 			dice.stream().filter(d -> !d.isSelected()).forEach(Die::roll);
-			roundData.reduceRerolls(1);
+			round.reduceRerolls(1);
 		}
 
 		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode

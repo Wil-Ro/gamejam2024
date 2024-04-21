@@ -1,10 +1,17 @@
 package com.monjaro.gamejam.main;
 
-public class RoundData {
+import com.monjaro.gamejam.segment.Segment;
+
+import java.util.List;
+
+public class Round {
+
+    private final List<Segment> segments;
     private int rerolls;
 
-    public RoundData(int rerolls){
+    public Round(List<Segment> segments, int rerolls){
         this.rerolls = rerolls;
+        this.segments = segments;
     }
 
     public int getRerolls() {
@@ -18,4 +25,5 @@ public class RoundData {
     public void reduceRerolls(int i) {
         rerolls -= i;
     }
+
 }
