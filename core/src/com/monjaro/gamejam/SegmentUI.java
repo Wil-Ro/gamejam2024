@@ -18,15 +18,15 @@ public class SegmentUI extends Actor {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.end();
-
-        ShapeRenderer renderer = new ShapeRenderer();
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.setColor(0.4f, 0.7f, 0.4f, 1);
-        renderer.rect(0, (Gdx.graphics.getHeight()/3)*2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3);
-        renderer.end();
-
-        batch.begin();
+//        batch.end();
+//
+//        ShapeRenderer renderer = new ShapeRenderer();
+//        renderer.begin(ShapeRenderer.ShapeType.Filled);
+//        renderer.setColor(0.4f, 0.7f, 0.4f, 1);
+//        renderer.rect(0, (Gdx.graphics.getHeight()/3)*2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3);
+//        renderer.end();
+//
+//        batch.begin();
 
     }
 }
