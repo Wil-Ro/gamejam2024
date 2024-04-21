@@ -17,10 +17,16 @@ public class Face extends Actor{
 	private final List<Pip> pips = new ArrayList<>();
 
 	private static Texture blankFaceSprite;
+
 	private static Texture pipSprite;
 
 	int faceNumber;
 
+	public Face(int pipCount) {
+		addPipsForValue(pipCount);
+		Random rand = new Random();
+		faceNumber = rand.nextInt(0, 5);
+	}
 
 	public Face(int pipCount, Transform transform) {
 		addPipsForValue(pipCount);
@@ -95,6 +101,10 @@ public class Face extends Actor{
 
 	public static void setPipSprite(Texture sprite){
 		pipSprite = sprite;
+	}
+
+	public Transform getTransform() {
+		return transform;
 	}
 
 	public Vector2 calculatePipLocation(Vector2 percentages) {
