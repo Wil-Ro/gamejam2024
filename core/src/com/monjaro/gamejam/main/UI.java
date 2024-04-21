@@ -5,17 +5,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class UI extends Actor{
-    private Transform position;
+
+    private final Game game;
+    private final Transform position;
     private static Texture rerollTexture;
 
     private int rerolls;
-    private int remainingRerolls;
 
-    public UI(int x, int y, int rerolls)
-    {
+    public UI(Game game, int x, int y) {
+        this.game = game;
         position = new Transform(x, y, 0, 0);
-        this.rerolls = rerolls;
-        this.remainingRerolls = rerolls;
     }
 
     public void setPosition(int x, int y){
@@ -23,7 +22,9 @@ public class UI extends Actor{
         position.y = y;
     }
 
-    public void setRemainingRerolls(int x){remainingRerolls = x;}
+    public void setRerolls(int x){
+        rerolls = x;
+    }
 
     public static void setRerollTexture(Texture texture){rerollTexture = texture;}
 
@@ -34,8 +35,8 @@ public class UI extends Actor{
 
     @Override
     public void render(SpriteBatch batch) {
-        for (int i = 0; i < rerolls; i++) {
-            if (i > remainingRerolls-1)
+        for (int i = 0; i < game.getRound().getMaxRerolls(); i++) {
+            if (i >= game.getRound().getRerolls())
                 batch.setColor(Color.GRAY);
             batch.draw(rerollTexture, (position.x + (40f*i)), (position.y));
             batch.setColor(Color.WHITE);

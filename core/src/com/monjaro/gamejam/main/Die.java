@@ -61,7 +61,8 @@ public class Die extends Actor {
 	public void decay() { //remove a pip from all faces of this die
 		for (Face face : faces) {
 			List<Face.Pip> pips = face.getPips();
-			Face.Pip decayed = pips.get(random.nextInt());
+			if (pips.isEmpty()) continue;
+			Face.Pip decayed = pips.get(random.nextInt(pips.size()));
 			face.removePip(decayed);
 		}
 	}
