@@ -22,8 +22,12 @@ public class TallDecay extends Decay {
 
 			if (die.getFaceValue() < highestValue) continue;
 
+			if (die.getFaceValue() > highestValue) {
+				highestValue = die.getFaceValue();
+				targets.clear();
+			}
+
 			targets.add(die);
-			highestValue = die.getFaceValue();
 		}
 
 		return targets;
