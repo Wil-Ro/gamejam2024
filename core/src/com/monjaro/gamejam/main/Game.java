@@ -27,7 +27,9 @@ public class Game extends ApplicationAdapter {
 
 	private Round round;
 	private int roundNumber = 0;
-	private List<Face> shope = new ArrayList<>();
+	private final List<Face> shope = new ArrayList<>();
+
+	private final List<FallingPip> fallingPips = new ArrayList<>();
 
 	private UI ui;
 	private SegmentUI segUi;
@@ -66,7 +68,7 @@ public class Game extends ApplicationAdapter {
 
 		float divide = Gdx.graphics.getWidth() / 6f;
 		for (int i = 0; i < 5; i++) {
-			dice.add(new Die(divide * (i + 1), 350, 64, 64));
+			dice.add(new Die(this, divide * (i + 1), 350, 64, 64));
 		}
 
 		reroll();
@@ -75,6 +77,8 @@ public class Game extends ApplicationAdapter {
 
 	public void tick() {
 		processInput();
+
+		fallingPips.forEach(Actor::tick);
 	}
 
 	public void processInput() {
@@ -149,16 +153,18 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 
-		//TODO debug
+		for (FallingPip pip : fallingPips) if (!pip.isOnTop()) pip.render(batch);
+
 		for (Die die : dice) {
 			die.render(batch);
 		}
+
+		for (FallingPip pip : fallingPips) if (pip.isOnTop()) pip.render(batch); //on top
 
 		int y = Gdx.graphics.getHeight() / 3 * 2 - 25;
 		for (Decay decay : round.getDecays()) {
 			font.draw(batch, "[#9E65A8]" + decay.getDescription(), 100, y -= 20);
 		}
-		//-----
 
 		ui.render(batch);
 
@@ -247,6 +253,10 @@ public class Game extends ApplicationAdapter {
 
 	public List<Face> getShope() {
 		return Collections.unmodifiableList(shope);
+	}
+
+	public void addFallingPip(FallingPip pip) {
+		fallingPips.add(pip);
 	}
 
 }
