@@ -57,12 +57,11 @@ public class DualSegment extends Segment {
 
 	@Override
 	public int getSpriteColumn() {
-		return 0;
+		return 2;
 	}
 
 	@Override
 	public int getSpriteRow() {
-		return 0;
+		return firstTrio ? 1 : 0;
 	}
-
 }

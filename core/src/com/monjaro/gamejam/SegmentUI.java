@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.monjaro.gamejam.main.Actor;
+import com.monjaro.gamejam.main.Game;
 import com.monjaro.gamejam.main.Round;
 
 public class SegmentUI extends Actor {
@@ -13,6 +14,7 @@ public class SegmentUI extends Actor {
     private static Texture separator;
     private static Texture criteriaSheet;
     private Rectangle rect;
+    private Game game;
 
     public SegmentUI(Rectangle rect) {
         this.rect = rect;
@@ -21,6 +23,10 @@ public class SegmentUI extends Actor {
     @Override
     public void tick() {
 
+    }
+
+    public void setGame(Game game){
+        this.game = game;
     }
 
     public static void setSeparator(Texture texture) {
@@ -45,12 +51,18 @@ public class SegmentUI extends Actor {
 
         int spriteWidth = 75;
         int spriteHeight = 200;
-        Round round = Game.getRound();
-        // change 3
-        for (int i = 0; i < 3; i++) {
-            int criteriaType = 0 ;
-            int criteriaQuantity = 0;
-            batch.draw(criteriaSheet, rect.x + (spriteWidth*i), rect.y, spriteWidth, rect.height, spriteWidth*criteriaType, spriteHeight*criteriaQuantity, spriteWidth, spriteHeight, false, false);
+        Round round = game.getRound();
+
+        int numOfSegments = round.getSegments().size();
+        for (int i = 0; i < numOfSegments; i++) {
+            int criteriaType = round.getSegments().get(i).getSpriteColumn();
+            int criteriaQuantity = round.getSegments().get(i).getSpriteRow();
+            batch.draw(criteriaSheet,
+                    rect.x + ((rect.width/(numOfSegments+1))*(i+1))-spriteWidth/2, ((rect.y + rect.height/2)-spriteHeight/2),
+                    spriteWidth, spriteHeight,
+                    spriteWidth*criteriaType, spriteHeight*(criteriaQuantity),
+                    spriteWidth, spriteHeight,
+                    false, false);
         }
 
 
