@@ -68,7 +68,7 @@ public class Die extends Actor {
 			Face.Pip decayed = pips.get(random.nextInt(pips.size()));
 			face.removePip(decayed);
 
-			game.addFallingPip(new FallingPip(new Transform(transform.getX(), transform.getY(), 0, 0), face.equals(getFace())));
+			game.addFallingPip(new FallingPip(new Transform(transform.getX(), transform.getY(), 0, 0)));
 		}
 	}
 
