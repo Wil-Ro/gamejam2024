@@ -47,4 +47,14 @@ public class OlympicSegment extends Segment {
 		return best >= length;
 	}
 
+	@Override
+	public int getSpriteColumn() {
+		return 0;
+	}
+
+	@Override
+	public int getSpriteRow() {
+		return 0;
+	}
+
 }
