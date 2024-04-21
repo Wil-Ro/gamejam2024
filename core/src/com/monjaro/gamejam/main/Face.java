@@ -19,9 +19,14 @@ public class Face extends Actor{
 	private static Texture blankFaceSprite;
 	private static Texture pipSprite;
 
+	int faceNumber;
+
+
 	public Face(int pipCount, Transform transform) {
 		addPipsForValue(pipCount);
 		this.transform = transform;
+		Random rand = new Random();
+		faceNumber = rand.nextInt(0, 5);
 	}
 
 	private void addPipsForValue(int value){
@@ -106,7 +111,7 @@ public class Face extends Actor{
 
 	@Override
 	public void render(SpriteBatch batch) {
-		Sprite face = new Sprite(blankFaceSprite);
+		Sprite face = new Sprite(blankFaceSprite, 64*faceNumber, 0, 64, 64);
 		face.setOrigin(face.getWidth()/2, face.getHeight()/2);
 		face.rotate(transform.getRotation());
 		face.setPosition(transform.x-face.getWidth()/2, transform.y-face.getHeight()/2);
