@@ -104,13 +104,13 @@ public class Game extends ApplicationAdapter {
 			die.render(batch);
 		}
 
-		int x = 50;
+		int y = Gdx.graphics.getHeight() - 50;
 		for (Segment segment : segments) {
 			String prefix = "[#9E65A8]";
 			if (segment.isDestroyed()) prefix = "[#EBE5EC]";
 			else if (segment.isDestroyedBy(getSelectedDice())) prefix = "[#528154]";
 
-			font.draw(batch, prefix + segment.getName(), x += 75, Gdx.graphics.getHeight() - 100);
+			font.draw(batch, prefix + segment.getName(), 100, y -= 20);
 		}
 		//-----
 
@@ -127,7 +127,7 @@ public class Game extends ApplicationAdapter {
 
 	public List<Die> getSelectedDice() {
 		return dice.stream()
-				.filter(d -> !d.isSelected())
+				.filter(Die::isSelected)
 				.toList();
 	}
 
