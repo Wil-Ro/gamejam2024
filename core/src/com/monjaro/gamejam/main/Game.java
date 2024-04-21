@@ -12,10 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.SegmentUI;
 import com.monjaro.gamejam.segment.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Game extends ApplicationAdapter {
 
@@ -30,7 +27,7 @@ public class Game extends ApplicationAdapter {
 
 	private Round round;
 	private int roundNumber = 0;
-	private List<Face> shop = new ArrayList<>();
+	private List<Face> shope = new ArrayList<>();
 
 	private UI ui;
 	private SegmentUI segUi;
@@ -156,6 +153,8 @@ public class Game extends ApplicationAdapter {
 
 	public void nextRound() {
 		round = generateRound(++roundNumber);
+
+		generateShope();
 	}
 
 	public Round generateRound(int difficulty) {
@@ -202,12 +201,23 @@ public class Game extends ApplicationAdapter {
 		return round;
 	}
 
-	private void fillShop() {
+	private void generateShope() {
+		Random random = new Random();
+		shope.clear();
 
+		int x = 64, y = 64;
+		while (shope.size() < 3) {
+			new Face(1 + random.nextInt(6), new Transform(x += 96, y, 64, 64)); //TODO RO FIX plz i beg!!!!
+		}
 	}
 
-	public List<Face> getShop() {
-		return shop;
+	public void removeShopeIndex(int index) {
+		shope.remove(index);
+		shope.add(index, null);
+	}
+
+	public List<Face> getShope() {
+		return Collections.unmodifiableList(shope);
 	}
 
 }
