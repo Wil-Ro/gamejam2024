@@ -56,7 +56,7 @@ public class Game extends ApplicationAdapter {
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 12;
 		font = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		generator.dispose(); // don't forget to dispose to avoid memory leaks!s
 		font.getData().markupEnabled = true;
 
 		float divide = Gdx.graphics.getWidth() / 6f;
