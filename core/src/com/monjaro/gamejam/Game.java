@@ -75,11 +75,6 @@ public class Game extends ApplicationAdapter {
 		if (input.isKeyJustPressed(Input.Keys.R) && roundData.getRerolls() > 0) { //reroll dice that aren't locked
 			dice.stream().filter(d -> !d.isSelected()).forEach(Die::roll);
 			roundData.reduceRerolls(1);
-
-			System.out.println("=".repeat(100));
-			for (Segment segment : segments) {
-				System.out.println(segment.getName() + ": " + segment.isDestroyedBy(dice));
-			}
 		}
 
 		for (int i = 0; i < dice.size(); i++) { //lock dice, iterating over for each keycode
