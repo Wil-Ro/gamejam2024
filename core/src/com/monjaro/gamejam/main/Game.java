@@ -61,7 +61,7 @@ public class Game extends ApplicationAdapter {
 
 		if (input.isKeyJustPressed(Input.Keys.R) && round.getRerolls() > 0) { //reroll dice that aren't locked
 			reroll();
-			round.reduceRerolls(0);
+			round.reduceRerolls(1);
 		}
 
 		if (input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
