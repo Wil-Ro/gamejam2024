@@ -3,6 +3,7 @@ package com.monjaro.gamejam.main;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -122,6 +123,12 @@ public class Face extends Actor{
 				transform.y + transform.height*y/100f - (float)pipSprite.getHeight()/2);
 	}
 
+	public Vector2 calculatePipLocation(Vector2 percentages, Rectangle rect) {
+		return new Vector2(
+				rect.x + rect.width/100f - (float)pipSprite.getWidth()/2,
+				rect.y + rect.height/100f - (float)pipSprite.getHeight()/2);
+	}
+
 	@Override
 	public void tick() {
 
@@ -138,6 +145,22 @@ public class Face extends Actor{
 
 		for(Pip pip : pips){
 			Vector2 position = calculatePipLocation(pip.getVectorLocation());
+			batch.draw(pipSprite,
+					position.x,
+					position.y);
+		}
+	}
+
+	public void renderAtRect(SpriteBatch batch, Rectangle rect) {
+		Sprite face = new Sprite(blankFaceSprite, 64*faceNumber, 0, (int)rect.width, (int)rect.height);
+		face.setOrigin(rect.getWidth()/2, rect.getHeight()/2);
+		//face.rotate(transform.getRotation());
+		face.setPosition(rect.x-rect.getWidth()/2, rect.y-rect.getHeight()/2);
+
+		face.draw(batch);
+
+		for(Pip pip : pips){
+			Vector2 position = calculatePipLocation(pip.getVectorLocation(), rect);
 			batch.draw(pipSprite,
 					position.x,
 					position.y);

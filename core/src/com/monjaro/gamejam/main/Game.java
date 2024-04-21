@@ -49,6 +49,7 @@ public class Game extends ApplicationAdapter {
 		ui = new UI(this, 50, 280);
 
 		dieNet = new DieNetUi();
+		dieNet.setGame(this);
 
 		shopeUi = new ShopeUi();
 		ShopeUi.setGame(this);
