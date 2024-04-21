@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.SegmentUI;
 import com.monjaro.gamejam.segment.*;
@@ -37,15 +38,19 @@ public class Game extends ApplicationAdapter {
 		font.getData().markupEnabled = true;
 		img = new Texture("badlogic.jpg");
 
-		segUi = new SegmentUI();
+		segUi = new SegmentUI(new Rectangle(0, (Gdx.graphics.getHeight()/3)*2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3));
+		segUi.setGame(this);
 
 		ui = new UI(this, 50, 280);
+
 		round = generateRound(0);
 
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
 		Die.setLockedSprite(new Texture("locked_die_border.png"));
 		UI.setRerollTexture(new Texture("reroll_symbol.png"));
+		SegmentUI.setCriteriaSheet(new Texture("criteria.png"));
+		// SegmentUI.setCriteriaSheet(""); not made yet
 
 		float divide = Gdx.graphics.getWidth() / 6f;
 		for (int i = 0; i < 5; i++) {

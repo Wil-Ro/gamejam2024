@@ -48,7 +48,7 @@ public class KinSegment extends Segment { //multiple dice of the same value
 
 	@Override
 	public int getSpriteRow() {
-		return 0;
+		return requirement - 2;
 	}
 
 }

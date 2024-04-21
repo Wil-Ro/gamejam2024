@@ -55,12 +55,12 @@ public class OlympicSegment extends Segment {
 
 	@Override
 	public int getSpriteColumn() {
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public int getSpriteRow() {
-		return 0;
+		return length - 2;
 	}
 
 }
