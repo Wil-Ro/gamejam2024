@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.monjaro.gamejam.SegmentUI;
 import com.monjaro.gamejam.segment.DualSegment;
 import com.monjaro.gamejam.segment.KinSegment;
 import com.monjaro.gamejam.segment.OlympicSegment;
@@ -28,6 +29,7 @@ public class Game extends ApplicationAdapter {
 
 	private Round round;
 	private UI ui;
+	private SegmentUI segUi;
 
 	@Override
 	public void create() {
@@ -35,6 +37,8 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
 		font.getData().markupEnabled = true;
 		img = new Texture("badlogic.jpg");
+
+		segUi = new SegmentUI();
 
 		ui = new UI(this, 50, 280);
 		round = new Round(List.of(new OlympicSegment(1), new OlympicSegment(3), new KinSegment(3), new DualSegment(false)), List.of(new ParityDecay(true)), 5);
@@ -128,6 +132,8 @@ public class Game extends ApplicationAdapter {
 		//-----
 
 		ui.render(batch);
+
+		segUi.render(batch);
 
 		batch.end();
 	}
