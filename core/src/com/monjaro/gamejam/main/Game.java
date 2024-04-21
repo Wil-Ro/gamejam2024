@@ -44,9 +44,6 @@ public class Game extends ApplicationAdapter {
 
 		ui = new UI(this, 50, 280);
 
-		reroll();
-		nextRound();
-
 		Face.setBlankFaceSprite(new Texture("blank_die_face.png"));
 		Face.setPipSprite(new Texture("pip.png"));
 		Die.setLockedSprite(new Texture("locked_die_border.png"));
@@ -58,6 +55,9 @@ public class Game extends ApplicationAdapter {
 		for (int i = 0; i < 5; i++) {
 			dice.add(new Die(divide * (i + 1), 350, 64, 64));
 		}
+
+		reroll();
+		nextRound();
 	}
 
 	public void tick() {
@@ -158,7 +158,7 @@ public class Game extends ApplicationAdapter {
 
 	public Round generateRound(int difficulty) {
 		Random random = new Random();
-		int points = 5 + difficulty * 3;
+		int points = 2 + difficulty * 3;
 
 		List<Segment> segments = new ArrayList<>();
 		List<Decay> decays = new ArrayList<>();
