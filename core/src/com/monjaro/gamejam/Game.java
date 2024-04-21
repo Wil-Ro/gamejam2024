@@ -13,13 +13,9 @@ import com.monjaro.gamejam.segment.KinSegment;
 import com.monjaro.gamejam.segment.Segment;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Game extends ApplicationAdapter {
-
-	private final Set<Actor> actors = new HashSet<>();
 
 	private final List<Die> dice = new ArrayList<>();
 	private final List<Segment> segments = new ArrayList<>();
@@ -57,15 +53,13 @@ public class Game extends ApplicationAdapter {
 
 	public void tick() {
 		processInput();
-
-		actors.forEach(Actor::tick);
 	}
 
 	public void processInput() {
 		Input input = Gdx.input;
 
 		if (input.isKeyJustPressed(Input.Keys.R)) { //reroll dice that aren't locked
-			dice.stream().filter(d -> !d.isLocked()).forEach(Die::roll);
+			dice.stream().filter(d -> !d.isSelected()).forEach(Die::roll);
 
 			System.out.println("=".repeat(100));
 			for (Segment segment : segments) {
@@ -78,7 +72,7 @@ public class Game extends ApplicationAdapter {
 			int keyCode = Input.Keys.NUM_1 + i; //keycode for the current die, 1, 2...9, 0 on keyboard
 
 			if (input.isKeyJustPressed(keyCode)) { //if key corresponding to die has been pressed
-				die.setLocked(!die.isLocked()); //flip lock state
+				die.setSelected(!die.isSelected()); //flip lock state
 			}
 		}
 	}
@@ -94,8 +88,6 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 
-		actors.forEach(a -> a.render(batch));
-
 		//TODO debug
 		for (Die die : dice) {
 			die.render(batch);
@@ -105,7 +97,7 @@ public class Game extends ApplicationAdapter {
 		for (Segment segment : segments) {
 			String prefix = "[#9E65A8]";
 			if (segment.isDestroyed()) prefix = "[#EBE5EC]";
-			else if (segment.isDestroyedBy(dice)) prefix = "[#528154]";
+			else if (segment.isDestroyedBy(getSelectedDice())) prefix = "[#528154]";
 
 			font.draw(batch, prefix + segment.getName(), x += 75, Gdx.graphics.getHeight() - 100);
 		}
@@ -120,12 +112,10 @@ public class Game extends ApplicationAdapter {
 		img.dispose();
 	}
 
-	private void addActor(Actor actor) {
-		actors.add(actor);
-	}
-
-	private void removeActor(Actor actor) {
-		actors.remove(actor);
+	public List<Die> getSelectedDice() {
+		return dice.stream()
+				.filter(d -> !d.isSelected())
+				.toList();
 	}
 
 }
