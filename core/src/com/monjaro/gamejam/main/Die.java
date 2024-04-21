@@ -109,4 +109,7 @@ public class Die extends Actor {
 		this.selected = selected;
 	}
 
+	public Face[] getFaces() {
+		return faces;
+	}
 }
