@@ -30,14 +30,16 @@ public class OlympicSegment extends Segment {
 				.sorted()
 				.toList();
 
-		int last = -1, run = 1, best = run;
+		int last = -1, run = 1, best = 0;
 
 		for (int value : values) {
 			if (value == last + 1) {
-				if (++run > best) best = run;
+				run++;
 			} else {
 				run = 1;
 			}
+
+			if (run > best) best = run;
 
 			last = value;
 		}
