@@ -133,15 +133,7 @@ public class Game extends ApplicationAdapter {
 			die.render(batch);
 		}
 
-		int y = Gdx.graphics.getHeight() - 50;
-		for (Segment segment : round.getSegments()) {
-			String prefix = "[#9E65A8]";
-			if (segment.isDestroyed()) prefix = "[#EBE5EC]";
-			else if (segment.isDestroyedBy(getSelectedDice())) prefix = "[#528154]";
-
-			font.draw(batch, prefix + segment.getName(), 100, y -= 20);
-		}
-		y -= 50;
+		int y = Gdx.graphics.getHeight() / 3 * 2 - 25;
 		for (Decay decay : round.getDecays()) {
 			font.draw(batch, "[#9E65A8]" + decay.getDescription(), 100, y -= 20);
 		}
