@@ -36,6 +36,10 @@ public class ShopeUi extends Actor{
         List<Face> shope = game.getShope();
         for (int i = 0; i < shope.size(); i++) {
             Face face = shope.get(i);
+
+            if (face == null)
+                continue;
+
             face.setTransform(new Transform(((Gdx.graphics.getWidth()/4)*i)+(Gdx.graphics.getWidth()/4), Gdx.graphics.getHeight()/8, 64, 64));
 
             face.render(batch);
