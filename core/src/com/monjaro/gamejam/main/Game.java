@@ -1,4 +1,4 @@
-package com.monjaro.gamejam;
+package com.monjaro.gamejam.main;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

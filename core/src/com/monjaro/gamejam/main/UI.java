@@ -1,4 +1,4 @@
-package com.monjaro.gamejam;
+package com.monjaro.gamejam.main;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;

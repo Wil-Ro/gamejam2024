@@ -1,4 +1,4 @@
-package com.monjaro.gamejam;
+package com.monjaro.gamejam.main;
 
 public class RoundData {
     private int rerolls;

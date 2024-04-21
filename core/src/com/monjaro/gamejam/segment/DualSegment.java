@@ -1,6 +1,6 @@
 package com.monjaro.gamejam.segment;
 
-import com.monjaro.gamejam.Die;
+import com.monjaro.gamejam.main.Die;
 
 import java.util.HashMap;
 import java.util.List;
