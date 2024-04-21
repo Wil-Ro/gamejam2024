@@ -30,7 +30,7 @@ public class Game extends ApplicationAdapter {
 
 	private Round round;
 	private int roundNumber = 0;
-	private List<Face> shop = new ArrayList<>();
+	private List<Face> shope = new ArrayList<>();
 
 	private UI ui;
 	private SegmentUI segUi;
@@ -202,12 +202,12 @@ public class Game extends ApplicationAdapter {
 		return round;
 	}
 
-	private void fillShop() {
+	private void fillShope() {
 
 	}
 
-	public List<Face> getShop() {
-		return shop;
+	public List<Face> getShope() {
+		return shope;
 	}
 
 }
