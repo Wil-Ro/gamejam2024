@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.SegmentUI;
@@ -35,8 +36,6 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		font.getData().markupEnabled = true;
 		img = new Texture("badlogic.jpg");
 
 		segUi = new SegmentUI(new Rectangle(0, (Gdx.graphics.getHeight()/3)*2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3));
@@ -51,6 +50,14 @@ public class Game extends ApplicationAdapter {
 		UI.setRerollTexture(new Texture("reroll_symbol.png"));
 		SegmentUI.setCriteriaSheet(new Texture("criteria.png"));
 		// SegmentUI.setCriteriaSheet(""); not made yet
+
+		// setting up font
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/single_day_regular.ttf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parameter.size = 12;
+		font = generator.generateFont(parameter); // font size 12 pixels
+		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		font.getData().markupEnabled = true;
 
 		float divide = Gdx.graphics.getWidth() / 6f;
 		for (int i = 0; i < 5; i++) {
