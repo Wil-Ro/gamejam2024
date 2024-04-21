@@ -31,6 +31,7 @@ public class Game extends ApplicationAdapter {
 
 	private UI ui;
 	private SegmentUI segUi;
+	private ShopeUi shopeUi;
 
 	@Override
 	public void create() {
@@ -42,12 +43,17 @@ public class Game extends ApplicationAdapter {
 
 		ui = new UI(this, 50, 280);
 
+		shopeUi = new ShopeUi();
+		ShopeUi.setGame(this);
+
 		Face.setBlankFaceSprite(new Texture("blank_die_faces_sheet.png"));
 
 		Face.setPipSprite(new Texture("pip.png"));
 		Die.setLockedSprite(new Texture("locked_die_border.png"));
 		UI.setRerollTexture(new Texture("reroll_symbol.png"));
 		SegmentUI.setCriteriaSheet(new Texture("criteria.png"));
+		ShopeUi.setBacking(new Texture("shope.png"));
+		ShopeUi.setFaceBacking(new Texture("shope_die_border.png"));
 		// SegmentUI.setCriteriaSheet(""); not made yet
 
 		// setting up font
@@ -142,6 +148,8 @@ public class Game extends ApplicationAdapter {
 
 		segUi.render(batch);
 
+		shopeUi.render(batch);
+
 		batch.end();
 	}
 
@@ -207,7 +215,7 @@ public class Game extends ApplicationAdapter {
 
 		int x = 64, y = 64;
 		while (shope.size() < 3) {
-			Face ware = new Face(1 + random.nextInt(6), new Transform(x += 96, y, 64, 64));//TODO RO FIX plz i beg!!!!
+			Face ware = new Face(1 + random.nextInt(6));//TODO RO FIX plz i beg!!!!
 			shope.add(ware);
 		}
 	}
