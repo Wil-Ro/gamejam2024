@@ -207,7 +207,8 @@ public class Game extends ApplicationAdapter {
 
 		int x = 64, y = 64;
 		while (shope.size() < 3) {
-			new Face(1 + random.nextInt(6), new Transform(x += 96, y, 64, 64)); //TODO RO FIX plz i beg!!!!
+			Face ware = new Face(1 + random.nextInt(6), new Transform(x += 96, y, 64, 64));//TODO RO FIX plz i beg!!!!
+			shope.add(ware);
 		}
 	}
 
