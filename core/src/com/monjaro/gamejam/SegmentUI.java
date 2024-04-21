@@ -1,6 +1,5 @@
 package com.monjaro.gamejam;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -57,12 +56,11 @@ public class SegmentUI extends Actor {
         int numOfSegments = round.getSegments().size();
         for (int i = 0; i < numOfSegments; i++) {
             if (round.getSegments().get(i).isDestroyedBy(game.getSelectedDice()))
-                batch.setColor(0.5f, 0.3f, 0.5f, 1);
+                batch.setColor(0.85f, 1f, 0.85f, 1f);
             else if (round.getSegments().get(i).isDestroyed())
-                batch.setColor(0,0,0,1);
-
-
-
+                batch.setColor(0.5f, 0.3f, 0.5f, 1f);
+            else
+                batch.setColor(0.9f, 0.85f, 1f, 1f);
 
             int criteriaType = round.getSegments().get(i).getSpriteColumn();
             int criteriaQuantity = round.getSegments().get(i).getSpriteRow();
@@ -73,9 +71,8 @@ public class SegmentUI extends Actor {
                     spriteWidth, spriteHeight,
                     false, false);
 
-            batch.setColor(Color.WHITE);
         }
 
-
+        batch.setColor(Color.WHITE);
     }
 }
