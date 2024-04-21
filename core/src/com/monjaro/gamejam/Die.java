@@ -74,7 +74,7 @@ public class Die extends Actor {
 		return getFace().getValue();
 	}
 
-	public boolean isBlank() {
+	public boolean isFaceBlank() {
 		return getFaceValue() <= 0;
 	}
 

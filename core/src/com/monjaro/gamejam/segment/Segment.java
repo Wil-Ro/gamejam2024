@@ -16,13 +16,13 @@ public abstract class Segment {
 		destroyed = true;
 	}
 
-	public abstract boolean isDestroyedBy(List<Die> die);
+	public abstract boolean isDestroyedBy(List<Die> dice);
 
 	protected Map<Integer, Integer> countValues(List<Die> dice) {
 		Map<Integer, Integer> counts = new HashMap<>();
 
 		for (Die die : dice) {
-			if (die.isBlank()) continue;
+			if (die.isFaceBlank()) continue;
 
 			int count = counts.getOrDefault(die.getFaceValue(), 0) + 1;
 			counts.put(die.getFaceValue(), count);

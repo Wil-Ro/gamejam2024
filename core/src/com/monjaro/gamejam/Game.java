@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.monjaro.gamejam.segment.DualSegment;
 import com.monjaro.gamejam.segment.KinSegment;
+import com.monjaro.gamejam.segment.OlympicSegment;
 import com.monjaro.gamejam.segment.Segment;
 
 import java.util.ArrayList;
@@ -54,6 +55,9 @@ public class Game extends ApplicationAdapter {
 
 		for (int i = 1; i <= 5; i++) {
 			segments.add(new KinSegment(i));
+		}
+		for (int i = 2; i <= 5; i++) {
+			segments.add(new OlympicSegment(i));
 		}
 		segments.add(new DualSegment(false));
 		segments.add(new DualSegment(true));

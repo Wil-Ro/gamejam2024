@@ -18,6 +18,7 @@ public class KinSegment extends Segment { //multiple dice of the same value
 			case 3 -> "Trio";
 			case 4 -> "Quartet";
 			case 5 -> "Quintet";
+			case 6 -> "What?";
 			default -> requirement + " of a kind";
 		};
 	}
