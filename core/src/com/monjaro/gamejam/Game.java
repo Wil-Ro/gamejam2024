@@ -13,13 +13,9 @@ import com.monjaro.gamejam.segment.KinSegment;
 import com.monjaro.gamejam.segment.Segment;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Game extends ApplicationAdapter {
-
-	private final Set<Actor> actors = new HashSet<>();
 
 	private final List<Die> dice = new ArrayList<>();
 	private final List<Segment> segments = new ArrayList<>();
@@ -57,8 +53,6 @@ public class Game extends ApplicationAdapter {
 
 	public void tick() {
 		processInput();
-
-		actors.forEach(Actor::tick);
 	}
 
 	public void processInput() {
@@ -94,8 +88,6 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 
-		actors.forEach(a -> a.render(batch));
-
 		//TODO debug
 		for (Die die : dice) {
 			die.render(batch);
@@ -118,14 +110,6 @@ public class Game extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		img.dispose();
-	}
-
-	private void addActor(Actor actor) {
-		actors.add(actor);
-	}
-
-	private void removeActor(Actor actor) {
-		actors.remove(actor);
 	}
 
 }
