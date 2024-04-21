@@ -1,8 +1,11 @@
 package com.monjaro.gamejam;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.monjaro.gamejam.main.Game;
+
+import static com.badlogic.gdx.graphics.GL20.*;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -13,6 +16,7 @@ public class DesktopLauncher {
 		config.setTitle("GameJam");
 		config.setWindowedMode(480, 800);
 		config.setResizable(false);
+
 		new Lwjgl3Application(new Game(), config);
 	}
 

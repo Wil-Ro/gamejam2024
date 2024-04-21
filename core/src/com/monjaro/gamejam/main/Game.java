@@ -14,6 +14,8 @@ import com.monjaro.gamejam.segment.*;
 
 import java.util.*;
 
+import static com.badlogic.gdx.graphics.GL20.*;
+
 public class Game extends ApplicationAdapter {
 
 	private final List<Die> dice = new ArrayList<>();
@@ -32,6 +34,7 @@ public class Game extends ApplicationAdapter {
 	private UI ui;
 	private SegmentUI segUi;
 	private ShopeUi shopeUi;
+	private DieNetUi dieNet;
 
 	@Override
 	public void create() {
@@ -42,6 +45,8 @@ public class Game extends ApplicationAdapter {
 		segUi.setGame(this);
 
 		ui = new UI(this, 50, 280);
+
+		dieNet = new DieNetUi();
 
 		shopeUi = new ShopeUi();
 		ShopeUi.setGame(this);
@@ -84,6 +89,8 @@ public class Game extends ApplicationAdapter {
 			reroll();
 			round.reduceRerolls(1);
 		}
+
+		dieNet.setVisible(input.isKeyPressed(Input.Keys.CONTROL_LEFT));
 
 		if (input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 			for (int i = 0; i < round.getSegments().size(); i++) {
@@ -165,6 +172,8 @@ public class Game extends ApplicationAdapter {
 		segUi.render(batch);
 
 		shopeUi.render(batch);
+
+		dieNet.render(batch);
 
 		batch.end();
 	}
