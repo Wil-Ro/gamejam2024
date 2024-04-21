@@ -196,7 +196,7 @@ public class Game extends ApplicationAdapter {
 	}
 
 	private void fillShop() {
-		
+
 	}
 
 	public List<Face> getShop() {
