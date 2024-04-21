@@ -10,6 +10,11 @@ public class ShopeUi extends Actor{
 
     private static Texture backing;
     private static Texture faceBacking;
+    private static Texture banner;
+
+    public static void setBanner(Texture banner) {
+        ShopeUi.banner = banner;
+    }
 
     public static void setFaceBacking(Texture faceBacking) {
         ShopeUi.faceBacking = faceBacking;
@@ -32,6 +37,7 @@ public class ShopeUi extends Actor{
 
     @Override
     public void render(SpriteBatch batch) {
+        batch.draw(banner, 10, (Gdx.graphics.getHeight()/4)+5, banner.getWidth()/2, banner.getHeight()/2);
         batch.draw(backing, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/4);
         List<Face> shope = game.getShope();
         for (int i = 0; i < shope.size(); i++) {

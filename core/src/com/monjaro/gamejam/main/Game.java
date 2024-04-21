@@ -61,6 +61,7 @@ public class Game extends ApplicationAdapter {
 		SegmentUI.setCriteriaSheet(new Texture("criteria.png"));
 		ShopeUi.setBacking(new Texture("shope.png"));
 		ShopeUi.setFaceBacking(new Texture("shope_die_border.png"));
+		ShopeUi.setBanner(new Texture("shope_banner.png"));
 		// SegmentUI.setCriteriaSheet(""); not made yet
 
 		// setting up font

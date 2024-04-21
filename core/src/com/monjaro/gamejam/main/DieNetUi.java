@@ -35,6 +35,13 @@ public class DieNetUi extends Actor{
         renderer.end();
 
         batch.begin();
+
+
+    }
+
+    private void getDieFaceLocation(int i)
+    {
+
     }
 
     public void setVisible(boolean b) {
